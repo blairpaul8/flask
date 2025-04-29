@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 app = Flask(__name__)
 
-counter = 15
+counter = -1
 
 @app.route('/', methods=['GET'])
 def index():
@@ -18,14 +18,15 @@ def increment():
 def getCount():
     global counter
     data = request.get_json()
-    if not data 'counter' in data
-        return jsonify({'error': 'Missing "counter" in JSON')}, 400
+    if not data or 'count' not in data:
+        return jsonify({'error': 'Missing "counter" in JSON'}), 400
 
     try:
-        counter = int(data['counter'])
-        return jsonify({'status': 'success', 'new_count': count}), 200
+        counter = int(data['count'])
+        return jsonify({'status': 'success', 'new_count': counter}), 200
     except ValueError:
         return jsonify({'error': '"count" must be an integer'}), 400
+
 
 
 if __name__ == '__main__':
