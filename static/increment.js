@@ -20,13 +20,19 @@ let eight = 1;
 let nine = 1;
 
 function incrementButton() {
-    var element = document.getElementById('incrementText');
-    var value = element.innerHTML;
-
-    ++value;
-    console.log(value);
-    document.getElementById('incrementText').innerHTML = value;
-    cardCount = value;
+    fetch('/increment', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        var element = document.getElementById('incrementText');
+        element.innerHTML = data.counter;  // Use server's returned counter
+        console.log('Counter updated to:', data.counter);
+        cardCount = data.counter;  // Update your JS variable too
+    })
+    .catch(error => {
+        console.error('Error during increment:', error);
+    });
 }
 
 
