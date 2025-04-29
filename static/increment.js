@@ -27,9 +27,12 @@ function incrementButton() {
     .then(response => response.json())
     .then(data => {
         let element = document.getElementById('incrementText');
+        let new_count = data.counter;
+      if (new_count > -1) {
         element.innerHTML = data.counter;  
         console.log('Counter updated to:', data.counter);
         cardCount = data.counter; 
+      }
     })
     .catch(error => {
         console.error('Error during increment:', error);
@@ -47,6 +50,7 @@ window.onload = function() {
 
 
 function reset() {
+        console.log("Count: " + cardCount);
         let holder = '';
         if(cardCount >= 2 && cardCount <= 6){
             cardCount1.cardNumber += 1;
