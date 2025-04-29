@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-counter = 0
+counter = 15
 
 @app.route('/', methods=['GET'])
 def index():
@@ -11,7 +11,6 @@ def index():
 @app.route('/increment', methods=['POST'])
 def increment():
     global counter
-    counter += 1
     return jsonify({'counter': counter})
 
 if __name__ == '__main__':
