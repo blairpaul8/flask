@@ -2,11 +2,7 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-<<<<<<< HEAD
-counter = 15
-=======
 counter = -1
->>>>>>> ab91b966f243aca366b280e437e16873b938b9e3
 
 @app.route('/', methods=['GET'])
 def index():
@@ -19,10 +15,6 @@ def mack():
 @app.route('/increment', methods=['POST'])
 def increment():
     global counter
-<<<<<<< HEAD
-=======
-   # counter += 1
->>>>>>> ab91b966f243aca366b280e437e16873b938b9e3
     return jsonify({'counter': counter})
 
 @app.route('/esp', methods=['POST'])
