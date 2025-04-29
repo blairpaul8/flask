@@ -14,5 +14,19 @@ def increment():
    # counter += 1
     return jsonify({'counter': counter})
 
+@app.route('/esp', methods=['POST'])
+def getCount():
+    global counter
+    data = request.get_json()
+    if not data 'counter' in data
+        return jsonify({'error': 'Missing "counter" in JSON')}, 400
+
+    try:
+        counter = int(data['counter'])
+        return jsonify({'status': 'success', 'new_count': count}), 200
+    except ValueError:
+        return jsonify({'error': '"count" must be an integer'}), 400
+
+
 if __name__ == '__main__':
     app.run(debug=True)
