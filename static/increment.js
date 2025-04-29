@@ -20,15 +20,18 @@ let eight = 1;
 let nine = 1;
 
 function incrementButton() {
+    // makes a network request to the flask app to the route /increment
     fetch('/increment', {
         method: 'POST'
     })
     .then(response => response.json())
     .then(data => {
-        var element = document.getElementById('incrementText');
-        element.innerHTML = data.counter;  // Use server's returned counter
+        let element = document.getElementById('incrementText');
+        // sets the html element to the value of counter
+        element.innerHTML = data.counter;  
         console.log('Counter updated to:', data.counter);
-        cardCount = data.counter;  // Update your JS variable too
+        //sets the global cardCount variable equal to counter value.
+        cardCount = data.counter; 
     })
     .catch(error => {
         console.error('Error during increment:', error);
