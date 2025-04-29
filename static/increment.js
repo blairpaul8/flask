@@ -19,24 +19,31 @@ let seven = 1;
 let eight = 1;
 let nine = 1;
 
+
 function incrementButton() {
-    // makes a network request to the flask app to the route /increment
     fetch('/increment', {
         method: 'POST'
     })
     .then(response => response.json())
     .then(data => {
         let element = document.getElementById('incrementText');
-        // sets the html element to the value of counter
         element.innerHTML = data.counter;  
         console.log('Counter updated to:', data.counter);
-        //sets the global cardCount variable equal to counter value.
         cardCount = data.counter; 
     })
     .catch(error => {
         console.error('Error during increment:', error);
+    })
+    .finally(() => {
+        // After this fetch is done (whether it succeeds or fails), wait 5 seconds and fetch again
+        setTimeout(incrementButton, 5000);  // 5000 milliseconds = 5 seconds
     });
 }
+
+// Start the loop immediately when the page loads
+window.onload = function() {
+    incrementButton();
+};
 
 
 function reset() {

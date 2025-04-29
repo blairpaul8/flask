@@ -2,16 +2,43 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
+<<<<<<< HEAD
 counter = 15
+=======
+counter = -1
+>>>>>>> ab91b966f243aca366b280e437e16873b938b9e3
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html', counter=counter)
 
+@app.route('/mack-address', methods=['GET'])
+def mack():
+    return jsonify({'name': 'Mack Address Hansen'})
+
 @app.route('/increment', methods=['POST'])
 def increment():
     global counter
+<<<<<<< HEAD
+=======
+   # counter += 1
+>>>>>>> ab91b966f243aca366b280e437e16873b938b9e3
     return jsonify({'counter': counter})
+
+@app.route('/esp', methods=['POST'])
+def getCount():
+    global counter
+    data = request.get_json()
+    if not data or 'count' not in data:
+        return jsonify({'error': 'Missing "counter" in JSON'}), 400
+
+    try:
+        counter = int(data['count'])
+        return jsonify({'status': 'success', 'new_count': counter}), 200
+    except ValueError:
+        return jsonify({'error': '"count" must be an integer'}), 400
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
