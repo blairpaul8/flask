@@ -8,6 +8,10 @@ counter = -1
 def index():
     return render_template('index.html', counter=counter)
 
+@app.route('/mack-address', methods=['GET'])
+def mack():
+    return jsonify({'name': 'Mack Address Hansen'})
+
 @app.route('/increment', methods=['POST'])
 def increment():
     global counter
